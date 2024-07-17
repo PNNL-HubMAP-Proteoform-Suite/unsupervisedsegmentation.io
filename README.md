@@ -1,4 +1,4 @@
-# UnsupervisedSegmentation Trelliscope
+# Unsupervised Segmentation Trelliscope
 
 Holds trelliscope displays to visualize segmentation results from the Unsupervised Segmentation study. See the website [here](https://pnnl-hubmap-proteoform-suite.github.io/unsupervisedsegmentation.io/)
 
