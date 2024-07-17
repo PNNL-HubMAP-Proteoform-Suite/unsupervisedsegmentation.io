@@ -1,0 +1,23 @@
+---
+title: "Unsupervised Segmentation Study"
+author: "David Degnan"
+output:
+  html_document
+---
+
+## Summary
+
+Here are trelliscope displays for two studies conducted within our unsupervised
+semantic segmentation project. The first, blur, studied the effect of blurring
+images on algorithmic performance using the subset. Those results informed whether
+blurring was applied to the second study, "full", where segmentation methods were
+applied to all images. 
+
+## Blur
+    
+<iframe src="./Blur/index.html" width=1000px height=600px data-external="1"> </iframe>>
+  
+## Full
+    
+<iframe src="./Full/index.html" width=1000px height=600px data-external="1"> </iframe>>
+

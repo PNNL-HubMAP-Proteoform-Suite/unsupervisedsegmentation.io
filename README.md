@@ -1,1 +1,2 @@
-# unsupervisedsegmentation.io
+# UnsupervisedSegmentation_Trelliscope
+Holds trelliscope displays to visualize segmentation results from the UnsupervisedSegmentation study
