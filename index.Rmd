@@ -7,11 +7,15 @@ output:
 
 ## Summary
 
-Here are trelliscope displays for two studies conducted within our unsupervised
-semantic segmentation project. The first, blur, studied the effect of blurring
-images on algorithmic performance using the subset. Those results informed whether
-blurring was applied to the second study, "full", where segmentation methods were
-applied to all images. 
+Here are trelliscope displays displaying the results of a study on unsupervised semantic segmentation 
+algorithms. The "dimension reduction" and "blur" displays include studies of the 
+effects of dimension reduction and blurring on segmentation algorithms, using a subset
+of 10 images. The "full" display includes all segmented images on the entire dataset of 30 
+images.
+
+## Dimension Reduction
+
+<iframe src="./DR/index.html" width=1000px height=600px data-external="1"> </iframe>>
 
 ## Blur
     

@@ -6,6 +6,40 @@ library(magick)
 
 draw_fun <- function(x, y) {ggdraw(clip = "on") + draw_image(x) + draw_label(y, y = 0.9, size = 16)}
 
+#########################
+## DIMENSION REDUCTION ##
+#########################
+
+# Generate data.frame to build display
+dr <- fread("~/Git_Repos/UnsupervisedSegmentation/Metadata/Dimension_Reduction.csv") %>%
+  rename(Root = Path) %>%
+  group_by(Root) %>%
+  summarise(`Number of Clusters` = n()) %>%
+  mutate(
+    Root = gsub("_Annotations", "", Root, fixed = T),
+    Original = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/Original/", Root, ".png"),
+    Target = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/Manual_Segmentation_Masks_PNG/",
+                    Root, "_Annotations.png"),
+    KCC = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/KCC_PNG/", Root, "_KCC.png"),
+    PCA_KCC = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/PCA_KCC_PNG/", Root, "_PCA_KCC.png"),
+    tSNE_KCC =paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/tSNE_KCC_PNG/", Root, "_tSNE_KCC.png"),
+    SVD_KCC = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/SVD_KCC_PNG/", Root, "_SVD_KCC.png")
+  )
+
+# Build display
+dr %>% select(Root, Original) %>% mutate(Original = map2_plot(Original, "Original Image", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "Original", path = "~/Git_Repos/unsupervisedsegmentation.io/DR/", thumb = TRUE)
+dr %>% select(Root, Target) %>% mutate(Target = map2_plot(Target, "Target", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "Target", path = "~/Git_Repos/unsupervisedsegmentation.io/DR/", thumb = TRUE)
+dr %>% select(Root, KCC) %>% mutate(KC = map2_plot(KCC, "KCC", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "KCC", path = "~/Git_Repos/unsupervisedsegmentation.io/DR/", thumb = TRUE)
+dr %>% select(Root, PCA_KCC) %>% mutate(KC = map2_plot(PCA_KCC, "PCA & KCC", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "PCA & KCC", path = "~/Git_Repos/unsupervisedsegmentation.io/DR/", thumb = TRUE)
+dr %>% select(Root, tSNE_KCC) %>% mutate(KC = map2_plot(tSNE_KCC, "tSNE & KCC", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "tSNE & KCC", path = "~/Git_Repos/unsupervisedsegmentation.io/DR/", thumb = TRUE)
+dr %>% select(Root, SVD_KCC) %>% mutate(KC = map2_plot(SVD_KCC, "SVD & KCC", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "SVD & KCC", path = "~/Git_Repos/unsupervisedsegmentation.io/DR/", thumb = TRUE)
+
 ################
 ## BLUR STUDY ##
 ################
@@ -29,10 +63,10 @@ toBuild <- fread("~/Git_Repos/UnsupervisedSegmentation/Metadata/Kidney_Annotatio
     KCC_Blur = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/KCC_Blur_PNG/", Root, "_KCC.png"),
     KMeans = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/KMeans_PNG/", Root, "_KMeans.png"),
     KMeans_Blur = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/KMeans_Blur_PNG/", Root, "_KMeans.png"),
-    PyImSeg = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/pyImSeg_PNG/", Root, ".png"),
-    PyImSeg_Blur = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/pyImSeg_Blur_PNG/", Root, ".png"),
-    PyTorchTip = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/PyTorch_PNG/", Root, ".png"),
-    PyTorchTip_Blur = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/PyTorch_Blur_PNG/", Root, ".png"),
+    pyImSegm = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/pyImSeg_PNG/", Root, ".png"),
+    pyImSegm_Blur = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/pyImSeg_Blur_PNG/", Root, ".png"),
+    `pytorch-tip` = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/PyTorch_PNG/", Root, ".png"),
+    `pytorch-tip_Blur` = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/PyTorch_Blur_PNG/", Root, ".png"),
     Recolorize = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/Recolorize_PNG/", Root, "_recolorize.png"),
     Recolorize_Blur = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/Recolorize_Blur_PNG/", Root, "_recolorize.png"),
     Supercells = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/Supercells_PNG/", Root, "_supercells.png"),
@@ -42,37 +76,37 @@ toBuild <- fread("~/Git_Repos/UnsupervisedSegmentation/Metadata/Kidney_Annotatio
   
 # Build display one plot at a time  
 toBuild %>% select(Root, Original) %>% mutate(Original = map2_plot(Original, "Original Image", draw_fun)) %>% ungroup() %>%
-  trelliscope(name = "Original", path = "~/Git_Repos/UnsupervisedSegmentation_Trelliscope/docs/Blur/", thumb = TRUE)
+  trelliscope(name = "Original", path = "~/Git_Repos/unsupervisedsegmentation.io/Blur/", thumb = TRUE)
 toBuild %>% select(Root, Target) %>% mutate(Target = map2_plot(Target, "Target", draw_fun)) %>% ungroup() %>%
-  trelliscope(name = "Target", path = "~/Git_Repos/UnsupervisedSegmentation_Trelliscope/docs/Blur/", thumb = TRUE)
+  trelliscope(name = "Target", path = "~/Git_Repos/unsupervisedsegmentation.io/Blur/", thumb = TRUE)
 toBuild %>% select(Root, Clara)  %>% mutate(Clara = map2_plot(Clara, "Clara", draw_fun)) %>% ungroup() %>%
-  trelliscope(name = "Clara", path = "~/Git_Repos/UnsupervisedSegmentation_Trelliscope/docs/Blur/", thumb = TRUE)
+  trelliscope(name = "Clara", path = "~/Git_Repos/unsupervisedsegmentation.io/Blur/", thumb = TRUE)
 toBuild %>% select(Root, Clara_Blur) %>% mutate(Clara_Blur = map2_plot(Clara_Blur, "Clara Blur", draw_fun)) %>% ungroup() %>%
-  trelliscope(name = "Clara_Blur", path = "~/Git_Repos/UnsupervisedSegmentation_Trelliscope/docs/Blur/", thumb = TRUE)
+  trelliscope(name = "Clara_Blur", path = "~/Git_Repos/unsupervisedsegmentation.io/Blur/", thumb = TRUE)
 toBuild %>% select(Root, KCC) %>% mutate(KC = map2_plot(KCC, "KCC", draw_fun)) %>% ungroup() %>%
-  trelliscope(name = "KCC", path = "~/Git_Repos/UnsupervisedSegmentation_Trelliscope/docs/Blur/", thumb = TRUE)
+  trelliscope(name = "KCC", path = "~/Git_Repos/unsupervisedsegmentation.io/Blur/", thumb = TRUE)
 toBuild %>% select(Root, KCC_Blur) %>% mutate(KCC_Blur = map2_plot(KCC_Blur, "KCC Blur", draw_fun)) %>% ungroup() %>%
-  trelliscope(name = "KCC_Blur", path = "~/Git_Repos/UnsupervisedSegmentation_Trelliscope/docs/Blur/", thumb = TRUE)
+  trelliscope(name = "KCC_Blur", path = "~/Git_Repos/unsupervisedsegmentation.io/Blur/", thumb = TRUE)
 toBuild %>% select(Root, KMeans) %>% mutate(KMeans = map2_plot(KMeans, "KMeans", draw_fun)) %>% ungroup() %>%
-  trelliscope(name = "KMeans", path = "~/Git_Repos/UnsupervisedSegmentation_Trelliscope/docs/Blur/", thumb = TRUE)
+  trelliscope(name = "KMeans", path = "~/Git_Repos/unsupervisedsegmentation.io/Blur/", thumb = TRUE)
 toBuild %>% select(Root, KMeans_Blur) %>% mutate(KMeans_Blur = map2_plot(KMeans_Blur, "KMeans Blur", draw_fun)) %>% ungroup() %>%
-  trelliscope(name = "KMeans_Blur", path = "~/Git_Repos/UnsupervisedSegmentation_Trelliscope/docs/Blur/", thumb = TRUE)
-toBuild %>% select(Root, PyImSeg) %>% mutate(PyImSeg = map2_plot(PyImSeg, "PyImSeg", draw_fun)) %>% ungroup() %>%
-  trelliscope(name = "PyImgSeg", path = "~/Git_Repos/UnsupervisedSegmentation_Trelliscope/docs/Blur/", thumb = TRUE)
-toBuild %>% select(Root, PyImSeg_Blur) %>% mutate(PyImSeg_Blur = map2_plot(PyImSeg_Blur, "PyImSeg Blur", draw_fun)) %>% ungroup() %>%
-  trelliscope(name = "PyImgSeg_Blur", path = "~/Git_Repos/UnsupervisedSegmentation_Trelliscope/docs/Blur/", thumb = TRUE)
-toBuild %>% select(Root, PyTorchTip) %>% mutate(PyTorchTip = map2_plot(PyTorchTip, "PyTorchTip", draw_fun)) %>% ungroup() %>%
-  trelliscope(name = "PyTorchTip", path = "~/Git_Repos/UnsupervisedSegmentation_Trelliscope/docs/Blur/", thumb = TRUE)
-toBuild %>% select(Root, PyTorchTip_Blur) %>% mutate(PyTorchTip_Blur = map2_plot(PyTorchTip_Blur, "PyTorchTip Blur", draw_fun)) %>% ungroup() %>%
-  trelliscope(name = "PyTorchTip_Blur", path = "~/Git_Repos/UnsupervisedSegmentation_Trelliscope/docs/Blur/", thumb = TRUE)
+  trelliscope(name = "KMeans_Blur", path = "~/Git_Repos/unsupervisedsegmentation.io/Blur/", thumb = TRUE)
+toBuild %>% select(Root, pyImSegm) %>% mutate(pyImSegm = map2_plot(pyImSegm, "pyImSegm", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "pyImgSegm", path = "~/Git_Repos/unsupervisedsegmentation.io/Blur/", thumb = TRUE)
+toBuild %>% select(Root, pyImSegm_Blur) %>% mutate(pyImSegm_Blur = map2_plot(pyImSegm_Blur, "pyImSegm Blur", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "pyImgSegm_Blur", path = "~/Git_Repos/unsupervisedsegmentation.io/Blur/", thumb = TRUE)
+toBuild %>% select(Root, `pytorch-tip`) %>% mutate(`pytorch-tip`= map2_plot(`pytorch-tip`, "pytorch-tip", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "pytorch-tip", path = "~/Git_Repos/unsupervisedsegmentation.io/Blur/", thumb = TRUE)
+toBuild %>% select(Root, `pytorch-tip_Blur`) %>% mutate(`pytorch-tip_Blur` = map2_plot(`pytorch-tip_Blur`, "pytorch-tip Blur", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "pytorch-tip_Blur", path = "~/Git_Repos/unsupervisedsegmentation.io/Blur/", thumb = TRUE)
 toBuild %>% select(Root, Recolorize) %>% mutate(Recolorize = map2_plot(Recolorize, "Recolorize", draw_fun)) %>% ungroup() %>%
-  trelliscope(name = "Recolorize", path = "~/Git_Repos/UnsupervisedSegmentation_Trelliscope/docs/Blur/", thumb = TRUE)
+  trelliscope(name = "Recolorize", path = "~/Git_Repos/unsupervisedsegmentation.io/Blur/", thumb = TRUE)
 toBuild %>% select(Root, Recolorize_Blur) %>% mutate(Recolorize_Blur = map2_plot(Recolorize_Blur, "Recolorize Blur", draw_fun)) %>% ungroup() %>%
-  trelliscope(name = "Recolorize_Blur", path = "~/Git_Repos/UnsupervisedSegmentation_Trelliscope/docs/Blur/", thumb = TRUE)
+  trelliscope(name = "Recolorize_Blur", path = "~/Git_Repos/unsupervisedsegmentation.io/Blur/", thumb = TRUE)
 toBuild %>% select(Root, Supercells) %>% mutate(Supercells = map2_plot(Supercells, "Supercells", draw_fun)) %>% ungroup() %>%
-  trelliscope(name = "Supercells", path = "~/Git_Repos/UnsupervisedSegmentation_Trelliscope/docs/Blur/", thumb = TRUE)
+  trelliscope(name = "Supercells", path = "~/Git_Repos/unsupervisedsegmentation.io/Blur/", thumb = TRUE)
 toBuild %>% select(Root, Supercells_Blur) %>% mutate(Supercells_Blur = map2_plot(Supercells_Blur, "Supercells Blur", draw_fun)) %>% ungroup() %>%
-  trelliscope(name = "Supercells_Blur", path = "~/Git_Repos/UnsupervisedSegmentation_Trelliscope/docs/Blur/", thumb = TRUE)
+  trelliscope(name = "Supercells_Blur", path = "~/Git_Repos/unsupervisedsegmentation.io/Blur/", thumb = TRUE)
 
 ################
 ## FULL STUDY ##
@@ -92,29 +126,29 @@ toBuild2 <- fread("~/Git_Repos/UnsupervisedSegmentation/Metadata/Kidney_Annotati
                    "_Clara.png"),
     KCC_Blur = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/KCC_Blur_PNG/", Root, "_KCC.png"),
     KMeans = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/KMeans_PNG/", Root, "_KMeans.png"),
-    PyImSeg = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/pyImSeg_PNG/", Root, ".png"),
-    PyTorchTip = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/PyTorch_PNG/", Root, ".png"),
+    pyImSegm = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/pyImSeg_PNG/", Root, ".png"),
+    `pytorch-tip` = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/PyTorch_PNG/", Root, ".png"),
     Recolorize = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/Recolorize_PNG/", Root, "_recolorize.png"),
     Supercells = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/Supercells_PNG/", Root, "_supercells.png")
   )
 
 # Build display one plot at a time  
 toBuild2 %>% select(Root, Original) %>% mutate(Original = map2_plot(Original, "Original Image", draw_fun)) %>% ungroup() %>%
-  trelliscope(name = "Original", path = "~/Git_Repos/UnsupervisedSegmentation_Trelliscope/docs/Full/", thumb = TRUE)
+  trelliscope(name = "Original", path = "~/Git_Repos/unsupervisedsegmentation.io/Full/", thumb = TRUE)
 toBuild2 %>% select(Root, Target) %>% mutate(Target = map2_plot(Target, "Target", draw_fun)) %>% ungroup() %>%
-  trelliscope(name = "Target", path = "~/Git_Repos/UnsupervisedSegmentation_Trelliscope/docs/Full/", thumb = TRUE)
+  trelliscope(name = "Target", path = "~/Git_Repos/unsupervisedsegmentation.io/Full/", thumb = TRUE)
 toBuild2 %>% select(Root, Clara)  %>% mutate(Clara = map2_plot(Clara, "Clara", draw_fun)) %>% ungroup() %>%
-  trelliscope(name = "Clara", path = "~/Git_Repos/UnsupervisedSegmentation_Trelliscope/docs/Full/", thumb = TRUE)
+  trelliscope(name = "Clara", path = "~/Git_Repos/unsupervisedsegmentation.io/Full/", thumb = TRUE)
 toBuild2 %>% select(Root, KCC_Blur) %>% mutate(KCC_Blur = map2_plot(KCC_Blur, "KCC Blur", draw_fun)) %>% ungroup() %>%
-  trelliscope(name = "KCC_Blur", path = "~/Git_Repos/UnsupervisedSegmentation_Trelliscope/docs/Full/", thumb = TRUE)
+  trelliscope(name = "KCC_Blur", path = "~/Git_Repos/unsupervisedsegmentation.io/Full/", thumb = TRUE)
 toBuild2 %>% select(Root, KMeans) %>% mutate(KMeans = map2_plot(KMeans, "KMeans", draw_fun)) %>% ungroup() %>%
-  trelliscope(name = "KMeans", path = "~/Git_Repos/UnsupervisedSegmentation_Trelliscope/docs/Full/", thumb = TRUE)
-toBuild2 %>% select(Root, PyImSeg) %>% mutate(PyImSeg = map2_plot(PyImSeg, "PyImSeg", draw_fun)) %>% ungroup() %>%
-  trelliscope(name = "PyImgSeg", path = "~/Git_Repos/UnsupervisedSegmentation_Trelliscope/docs/Full/", thumb = TRUE)
-toBuild2 %>% select(Root, PyTorchTip) %>% mutate(PyTorchTip = map2_plot(PyTorchTip, "PyTorchTip", draw_fun)) %>% ungroup() %>%
-  trelliscope(name = "PyTorchTip", path = "~/Git_Repos/UnsupervisedSegmentation_Trelliscope/docs/Full/", thumb = TRUE)
+  trelliscope(name = "KMeans", path = "~/Git_Repos/unsupervisedsegmentation.io/Full/", thumb = TRUE)
+toBuild2 %>% select(Root, pyImSegm) %>% mutate(PyImSeg = map2_plot(pyImSegm, "pyImSegm", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "pyImgSegm", path = "~/Git_Repos/unsupervisedsegmentation.io/Full/", thumb = TRUE)
+toBuild2 %>% select(Root, `pytorch-tip`) %>% mutate(`pytorch-tip` = map2_plot(`pytorch-tip`, "pytorch-tip", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "pytorch-tip", path = "~/Git_Repos/unsupervisedsegmentation.io/Full/", thumb = TRUE)
 toBuild2 %>% select(Root, Recolorize) %>% mutate(Recolorize = map2_plot(Recolorize, "Recolorize", draw_fun)) %>% ungroup() %>%
-  trelliscope(name = "Recolorize", path = "~/Git_Repos/UnsupervisedSegmentation_Trelliscope/docs/Full/", thumb = TRUE)
+  trelliscope(name = "Recolorize", path = "~/Git_Repos/unsupervisedsegmentation.io/Full/", thumb = TRUE)
 toBuild2 %>% select(Root, Supercells) %>% mutate(Supercells = map2_plot(Supercells, "Supercells", draw_fun)) %>% ungroup() %>%
-  trelliscope(name = "Supercells", path = "~/Git_Repos/UnsupervisedSegmentation_Trelliscope/docs/Full/", thumb = TRUE)
+  trelliscope(name = "Supercells", path = "~/Git_Repos/unsupervisedsegmentation.io/Full/", thumb = TRUE)
 
