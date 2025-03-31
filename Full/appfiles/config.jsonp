@@ -8,7 +8,5 @@ __loadTrscopeConfig__aea2df6a({
     }
   },
   "split_layout": false,
-  "has_legend": false,
-  "require_token": false,
-  "disclaimer": false
+  "has_legend": false
 })

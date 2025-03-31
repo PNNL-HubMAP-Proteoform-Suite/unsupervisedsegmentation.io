@@ -122,10 +122,15 @@ toBuild2 <- fread("~/Git_Repos/UnsupervisedSegmentation/Metadata/Kidney_Annotati
     Original = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/Original/", Root, ".png"),
     Target = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/Manual_Segmentation_Masks_PNG/",
                     Root, "_Annotations.png"),
+    Binning = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/Binning_PNG/", Root, 
+                     "_binning.png"),
     Clara = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/Clara_PNG/", Root,
                    "_Clara.png"),
+    KCC = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/KCC_PNG/", Root, "_KCC.png"),
     KCC_Blur = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/KCC_Blur_PNG/", Root, "_KCC.png"),
     KMeans = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/KMeans_PNG/", Root, "_KMeans.png"),
+    `Multi-Otsu` = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/Multiotsu_PNG/", Root, 
+                          "_multiotsu.png"),
     pyImSegm = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/pyImSeg_PNG/", Root, ".png"),
     `pytorch-tip` = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/PyTorch_PNG/", Root, ".png"),
     Recolorize = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Kidney_Tiles/Recolorize_PNG/", Root, "_recolorize.png"),
@@ -151,4 +156,10 @@ toBuild2 %>% select(Root, Recolorize) %>% mutate(Recolorize = map2_plot(Recolori
   trelliscope(name = "Recolorize", path = "~/Git_Repos/unsupervisedsegmentation.io/Full/", thumb = TRUE)
 toBuild2 %>% select(Root, Supercells) %>% mutate(Supercells = map2_plot(Supercells, "Supercells", draw_fun)) %>% ungroup() %>%
   trelliscope(name = "Supercells", path = "~/Git_Repos/unsupervisedsegmentation.io/Full/", thumb = TRUE)
+toBuild2 %>% select(Root, Binning) %>% mutate(Binning = map2_plot(Binning, "Binning", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "Binning", path = "~/Git_Repos/unsupervisedsegmentation.io/Full/", thumb = TRUE)
+toBuild2 %>% select(Root, `Multi-Otsu`) %>% mutate(`Multi-Otsu` = map2_plot(`Multi-Otsu`, "Multi-Otsu", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "Multi-Otsu", path = "~/Git_Repos/unsupervisedsegmentation.io/Full/", thumb = TRUE)
+toBuild2 %>% select(Root, KCC) %>% mutate(KCC = map2_plot(KCC, "KCC", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "KCC", path = "~/Git_Repos/unsupervisedsegmentation.io/Full/", thumb = TRUE)
 

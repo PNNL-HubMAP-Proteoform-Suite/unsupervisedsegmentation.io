@@ -16,10 +16,6 @@ images.
 ## Dimension Reduction
 
 <iframe src="./DR/index.html" width=1000px height=600px data-external="1"> </iframe>>
-
-## Blur
-    
-<iframe src="./Blur/index.html" width=1000px height=600px data-external="1"> </iframe>>
   
 ## Full
     
