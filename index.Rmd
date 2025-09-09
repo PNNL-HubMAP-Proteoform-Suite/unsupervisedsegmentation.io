@@ -10,14 +10,18 @@ output:
 Here are trelliscope displays displaying the results of a study on unsupervised semantic segmentation 
 algorithms. The "dimension reduction" and "blur" displays include studies of the 
 effects of dimension reduction and blurring on segmentation algorithms, using a subset
-of 10 images. The "full" display includes all segmented images on the entire dataset of 30 
-images.
+of 10 kidney images. The "kidney" display includes all segmented images on 30
+kidney images, and the "root" display includes all segmentated images on 25
+root tip images. 
 
 ## Dimension Reduction
 
 <iframe src="./DR/index.html" width=1000px height=600px data-external="1"> </iframe>>
   
-## Full
+## Kidney
     
 <iframe src="./Full/index.html" width=1000px height=600px data-external="1"> </iframe>>
 
+## Root
+
+<iframe src="./Root/index.html" width=1000px height=600px data-external="1"> </iframe>>

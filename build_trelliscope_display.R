@@ -167,7 +167,7 @@ toBuild2 %>% select(Root, KCC) %>% mutate(KCC = map2_plot(KCC, "KCC", draw_fun))
 ## ROOT STUDY ##
 ################
 
-toBuild3 <- fread("../Metadata/Root.csv") %>%
+toBuild3 <- fread("~/Git_Repos/UnsupervisedSegmentation/Metadata/Root.csv") %>%
   select(Image) %>%
   group_by(Image) %>%
   summarize(`Number of Clusters` = n()) %>%
