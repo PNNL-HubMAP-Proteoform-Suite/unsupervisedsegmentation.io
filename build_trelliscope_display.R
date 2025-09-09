@@ -163,3 +163,46 @@ toBuild2 %>% select(Root, `Multi-Otsu`) %>% mutate(`Multi-Otsu` = map2_plot(`Mul
 toBuild2 %>% select(Root, KCC) %>% mutate(KCC = map2_plot(KCC, "KCC", draw_fun)) %>% ungroup() %>%
   trelliscope(name = "KCC", path = "~/Git_Repos/unsupervisedsegmentation.io/Full/", thumb = TRUE)
 
+################
+## ROOT STUDY ##
+################
+
+toBuild3 <- fread("../Metadata/Root.csv") %>%
+  select(Image) %>%
+  group_by(Image) %>%
+  summarize(`Number of Clusters` = n()) %>%
+  mutate(
+    Original = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Root/Original/", Image, ".png"),
+    Target = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Root/Manual_Segmentation_Masks_PNG/", Image, ".png"),
+    Binning = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Root/Binning_PNG/", Image, "_binning.png"),
+    Clara = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Root/Clara_PNG/", Image, "_CLARA.png"),
+    KCC = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Root/KCC_PNG/", Image, "_KCC.png"),
+    KMeans = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Root/KMeans_PNG/", Image, "_KMeans.png"),
+    `Multi-Otsu` = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Root/Multiotsu_PNG/", Image, "_multiotsu.png"),
+    `pytorch-tip` = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Root/PyTorch_PNG/", Image, ".png"),
+    Recolorize = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Root/Recolorize_PNG/", Image, "_recolorize.png"),
+    Supercells = paste0("~/Git_Repos/UnsupervisedSegmentation/Images/Root/Supercells_PNG/", Image, "_supercells.png")
+  )
+
+toBuild3 %>% select(Image, Original) %>% mutate(Original = map2_plot(Original, "", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "Original", path = "~/Git_Repos/unsupervisedsegmentation.io/Root/", thumb = TRUE)
+toBuild3 %>% select(Image, Target) %>% mutate(Target = map2_plot(Target, "", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "Target", path = "~/Git_Repos/unsupervisedsegmentation.io/Root/", thumb = TRUE)
+toBuild3 %>% select(Image, Binning) %>% mutate(Binning = map2_plot(Binning, "", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "Binning", path = "~/Git_Repos/unsupervisedsegmentation.io/Root/", thumb = TRUE)
+toBuild3 %>% select(Image, Clara) %>% mutate(Clara = map2_plot(Clara, "", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "Clara", path = "~/Git_Repos/unsupervisedsegmentation.io/Root/", thumb = TRUE)
+toBuild3 %>% select(Image, KCC) %>% mutate(KCC = map2_plot(KCC, "", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "KCC", path = "~/Git_Repos/unsupervisedsegmentation.io/Root/", thumb = TRUE)
+toBuild3 %>% select(Image, KMeans) %>% mutate(KMeans = map2_plot(KMeans, "", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "KMeans", path = "~/Git_Repos/unsupervisedsegmentation.io/Root/", thumb = TRUE)
+toBuild3 %>% select(Image, `Multi-Otsu`) %>% mutate(`Multi-Otsu` = map2_plot(`Multi-Otsu`, "", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "Multi-Otsu", path = "~/Git_Repos/unsupervisedsegmentation.io/Root/", thumb = TRUE)
+toBuild3 %>% select(Image, `pytorch-tip`) %>% mutate(`pytorch-tip` = map2_plot(`pytorch-tip`, "", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "pytorch-tip", path = "~/Git_Repos/unsupervisedsegmentation.io/Root/", thumb = TRUE)
+toBuild3 %>% select(Image, Recolorize) %>% mutate(Recolorize = map2_plot(Recolorize, "", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "Recolorize", path = "~/Git_Repos/unsupervisedsegmentation.io/Root/", thumb = TRUE)
+toBuild3 %>% select(Image, Supercells) %>% mutate(Supercells = map2_plot(Supercells, "", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "Supercells", path = "~/Git_Repos/unsupervisedsegmentation.io/Root/", thumb = TRUE)
+
+
