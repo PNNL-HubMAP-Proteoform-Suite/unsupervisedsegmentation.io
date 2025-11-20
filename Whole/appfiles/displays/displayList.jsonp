@@ -1,0 +1,112 @@
+__loadDisplayList__eede3c31([
+  {
+    "group": "common",
+    "name": "Binning",
+    "desc": "",
+    "n": 7,
+    "order": 1,
+    "height": 500,
+    "width": 500,
+    "updated": "2025-11-20 09:18:25",
+    "keySig": "3b45abcfe75c14ab8a0981498ad612f0"
+  },
+  {
+    "group": "common",
+    "name": "Clara",
+    "desc": "",
+    "n": 7,
+    "order": 1,
+    "height": 500,
+    "width": 500,
+    "updated": "2025-11-20 09:18:26",
+    "keySig": "3b45abcfe75c14ab8a0981498ad612f0"
+  },
+  {
+    "group": "common",
+    "name": "Consensus",
+    "desc": "",
+    "n": 7,
+    "order": 1,
+    "height": 500,
+    "width": 500,
+    "updated": "2025-11-20 09:18:31",
+    "keySig": "3b45abcfe75c14ab8a0981498ad612f0"
+  },
+  {
+    "group": "common",
+    "name": "KCC",
+    "desc": "",
+    "n": 7,
+    "order": 1,
+    "height": 500,
+    "width": 500,
+    "updated": "2025-11-20 09:18:27",
+    "keySig": "3b45abcfe75c14ab8a0981498ad612f0"
+  },
+  {
+    "group": "common",
+    "name": "KMeans",
+    "desc": "",
+    "n": 7,
+    "order": 1,
+    "height": 500,
+    "width": 500,
+    "updated": "2025-11-20 09:18:27",
+    "keySig": "3b45abcfe75c14ab8a0981498ad612f0"
+  },
+  {
+    "group": "common",
+    "name": "Multi_Otsu",
+    "desc": "",
+    "n": 7,
+    "order": 1,
+    "height": 500,
+    "width": 500,
+    "updated": "2025-11-20 09:18:28",
+    "keySig": "3b45abcfe75c14ab8a0981498ad612f0"
+  },
+  {
+    "group": "common",
+    "name": "Original",
+    "desc": "",
+    "n": 7,
+    "order": 1,
+    "height": 500,
+    "width": 500,
+    "updated": "2025-11-20 09:18:24",
+    "keySig": "3b45abcfe75c14ab8a0981498ad612f0"
+  },
+  {
+    "group": "common",
+    "name": "pytorch_tip",
+    "desc": "",
+    "n": 7,
+    "order": 1,
+    "height": 500,
+    "width": 500,
+    "updated": "2025-11-20 09:18:29",
+    "keySig": "3b45abcfe75c14ab8a0981498ad612f0"
+  },
+  {
+    "group": "common",
+    "name": "Recolorize",
+    "desc": "",
+    "n": 7,
+    "order": 1,
+    "height": 500,
+    "width": 500,
+    "updated": "2025-11-20 09:18:30",
+    "keySig": "3b45abcfe75c14ab8a0981498ad612f0"
+  },
+  {
+    "group": "common",
+    "name": "Supercells",
+    "desc": "",
+    "n": 7,
+    "order": 1,
+    "height": 500,
+    "width": 500,
+    "updated": "2025-11-20 09:18:30",
+    "keySig": "3b45abcfe75c14ab8a0981498ad612f0"
+  }
+])

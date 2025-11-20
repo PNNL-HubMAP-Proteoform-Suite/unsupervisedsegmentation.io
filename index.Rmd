@@ -11,8 +11,10 @@ Here are trelliscope displays displaying the results of a study on unsupervised 
 algorithms. The "dimension reduction" and "blur" displays include studies of the 
 effects of dimension reduction and blurring on segmentation algorithms, using a subset
 of 10 kidney images. The "kidney" display includes all segmented images on 30
-kidney images, and the "root" display includes all segmentated images on 25
-root tip images. 
+kidney images, and the "root" display includes all segmented images on 25
+root tip images. The "whole image" represents a case where segmentation was performed
+on the whole kidney image once, as opposed to segmentation occuring on a tile by
+tile basis.
 
 ## Dimension Reduction
 
@@ -25,3 +27,7 @@ root tip images.
 ## Root
 
 <iframe src="./Root/index.html" width=1000px height=600px data-external="1"> </iframe>>
+
+## Whole Image
+
+<iframe src="./Whole/index.html" width=1000px height=600px data-external="1"> </iframe>>

@@ -205,4 +205,48 @@ toBuild3 %>% select(Image, Recolorize) %>% mutate(Recolorize = map2_plot(Recolor
 toBuild3 %>% select(Image, Supercells) %>% mutate(Supercells = map2_plot(Supercells, "", draw_fun)) %>% ungroup() %>%
   trelliscope(name = "Supercells", path = "~/Git_Repos/unsupervisedsegmentation.io/Root/", thumb = TRUE)
 
+#################
+## WHOLE IMAGE ##
+#################
+
+toBuild4 <- data.frame(
+ Original = list.files("~/Downloads/msi_segementation/segementation_study/out_results/tiles/OG_NO_seg", full.names = TRUE)
+) %>%
+  mutate(
+    Image = map_chr(Original, function(x) {strsplit(x, "/") %>% unlist() %>% tail(1) %>% strsplit("-") %>% unlist() %>% tail(1) %>% gsub(pattern = ".png", replacement = "")}),
+    Binning = paste0("~/Downloads/msi_segementation/segementation_study/out_results/tiles/binning/binning-", Image, ".png"),
+    Clara = paste0("~/Downloads/msi_segementation/segementation_study/out_results/tiles/clara/clara-", Image, ".png"),
+    KCC = paste0("~/Downloads/msi_segementation/segementation_study/out_results/tiles/KCC/kcc-", Image, ".png"),
+    KMeans = paste0("~/Downloads/msi_segementation/segementation_study/out_results/tiles/kmeans/kmeans-", Image, ".png"),
+    `Multi-Otsu` = paste0("~/Downloads/msi_segementation/segementation_study/out_results/tiles/multiotsu/multiotsu-", Image, ".png"),
+    `pytorch-tip` = paste0("~/Downloads/msi_segementation/segementation_study/out_results/tiles/pytt/pytt-", Image, ".png"),
+    Recolorize = paste0("~/Downloads/msi_segementation/segementation_study/out_results/tiles/recolorize/recolorize-", Image, ".png"),
+    Supercells = paste0("~/Downloads/msi_segementation/segementation_study/out_results/tiles/supercells/supercells-", Image, ".png"),
+    Consensus = paste0("~/Downloads/msi_segementation/segementation_study/out_results/tiles/Consensus/Consensus-", Image, ".png")
+  )
+
+
+toBuild4 %>% select(Image, Original) %>% mutate(Original = map2_plot(Original, "Original", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "Original", path = "~/Git_Repos/unsupervisedsegmentation.io/Whole/", thumb = TRUE)
+toBuild4 %>% select(Image, Binning) %>% mutate(Binning = map2_plot(Binning, "Binning", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "Binning", path = "~/Git_Repos/unsupervisedsegmentation.io/Whole", thumb = TRUE)
+toBuild4 %>% select(Image, Clara) %>% mutate(Clara = map2_plot(Clara, "Clara", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "Clara", path = "~/Git_Repos/unsupervisedsegmentation.io/Whole/", thumb = TRUE)
+toBuild4 %>% select(Image, KCC) %>% mutate(KCC = map2_plot(KCC, "KCC", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "KCC", path = "~/Git_Repos/unsupervisedsegmentation.io/Whole/", thumb = TRUE)
+toBuild4 %>% select(Image, KMeans) %>% mutate(KMeans = map2_plot(KMeans, "KMeans", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "KMeans", path = "~/Git_Repos/unsupervisedsegmentation.io/Whole/", thumb = TRUE)
+toBuild4 %>% select(Image, `Multi-Otsu`) %>% mutate(`Multi-Otsu` = map2_plot(`Multi-Otsu`, "Multi-Otsu", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "Multi-Otsu", path = "~/Git_Repos/unsupervisedsegmentation.io/Whole/", thumb = TRUE)
+toBuild4 %>% select(Image, `pytorch-tip`) %>% mutate(`pytorch-tip` = map2_plot(`pytorch-tip`, "pytorch-tip", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "pytorch-tip", path = "~/Git_Repos/unsupervisedsegmentation.io/Whole/", thumb = TRUE)
+toBuild4 %>% select(Image, Recolorize) %>% mutate(Recolorize = map2_plot(Recolorize, "Recolorize", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "Recolorize", path = "~/Git_Repos/unsupervisedsegmentation.io/Whole/", thumb = TRUE)
+toBuild4 %>% select(Image, Supercells) %>% mutate(Supercells = map2_plot(Supercells, "Supercells", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "Supercells", path = "~/Git_Repos/unsupervisedsegmentation.io/Whole/", thumb = TRUE)
+toBuild4 %>% select(Image, Consensus) %>% mutate(Consensus = map2_plot(Consensus, "Consensus", draw_fun)) %>% ungroup() %>%
+  trelliscope(name = "Consensus", path = "~/Git_Repos/unsupervisedsegmentation.io/Whole/", thumb = TRUE)
+
+
+
 
